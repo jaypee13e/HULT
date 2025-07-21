@@ -1,0 +1,191 @@
+body {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Arial', sans-serif;
+  perspective: 1000px;
+  overflow: hidden;
+}
+
+.envelope-container {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+.envelope-container:hover {
+  transform: translateY(-10px);
+}
+
+/* Envelope base with decorative fold lines */
+.envelope {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #f5d1d1;
+  border-radius: 5px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  overflow: hidden;
+}
+
+.envelope:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 120px solid #f8c3c3;
+  border-left: 150px solid transparent;
+  border-right: 150px solid transparent;
+  transform-origin: top;
+  transform: rotateX(0deg);
+  transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 2;
+}
+
+.envelope:after {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: #e2a8a8;
+  transform-origin: top;
+  transform: rotateX(180deg);
+  transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 2;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.stamp {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, #f8f8f8 40%, #e6e6e6 100%);
+  border: 2px solid #f8f8f8;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.stamp:before {
+  content: 'PRIORITY';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  font-size: 6px;
+  font-weight: bold;
+  color: #c0392b;
+  letter-spacing: 1px;
+}
+
+.letter {
+  position: absolute;
+  width: 90%;
+  height: 85%;
+  background: white;
+  margin: 5% 5%;
+  padding: 20px;
+  box-sizing: border-box;
+  transform: translateY(100%);
+  transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  border-radius: 3px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  z-index: 0;
+}
+
+.letter-content {
+  font-family: 'Segoe Print', cursive;
+  color: #333;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.letter-content h2 {
+  color: #c0392b;
+  margin-bottom: 20px;
+}
+
+.letter-content p {
+  margin-bottom: 15px;
+}
+
+.envelope.open {
+  transform: translateZ(100px);
+}
+
+.envelope.open:before {
+  transform: rotateX(180deg);
+}
+
+.envelope.open:after {
+  transform: rotateX(0deg);
+}
+
+.envelope.open .letter {
+  transform: translateY(0);
+}
+
+.envelope-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #db9b9b;
+  transform: rotateX(180deg);
+  border-radius: 5px;
+  z-index: -1;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #f00;
+  opacity: 0;
+}
+
+.main-container {
+  position: relative;
+}
+
+.next-button {
+  position: absolute;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 30px;
+  background-color: #e2a8a8;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.next-button:hover {
+  background-color: #c0392b;
+  transform: translateX(-50%) scale(1.05);
+}
+
+@media (max-width: 400px) {
+  .envelope-container {
+    width: 250px;
+    height: 170px;
+  }
+}
